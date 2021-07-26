@@ -1,4 +1,4 @@
-https://www.hackerrank.com/challenges/non-divisible-subset/problem
+// https://www.hackerrank.com/challenges/non-divisible-subset/problem
 
 #include <bits/stdc++.h>
 
@@ -32,6 +32,7 @@ int nonDivisibleSubset(int k, vector<int> s) {
 
   return ans + min(1, a[0]);
 }
+
 
 int main()
 {
