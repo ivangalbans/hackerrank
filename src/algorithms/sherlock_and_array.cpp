@@ -1,7 +1,6 @@
-// https://www.hackerrank.com/challenges/icecream-parlor/problem
+// https://www.hackerrank.com/challenges/sherlock-and-array/problem
 
 #include <bits/stdc++.h>
-#include <utility>
 
 using namespace std;
 
@@ -10,48 +9,35 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'icecreamParlor' function below.
+ * Complete the 'balancedSums' function below.
  *
- * The function is expected to return an INTEGER_ARRAY.
- * The function accepts following parameters:
- *  1. INTEGER m
- *  2. INTEGER_ARRAY arr
+ * The function is expected to return a STRING.
+ * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-vector<int> icecreamParlor(int m, vector<int> arr) {
-  int l = 0, r = arr.size() - 1, n = arr.size();
+string balancedSums(vector<int> arr) {
+  int n = arr.size();
+  vector<long long> acc(n + 1);
+  for (int i = 1; i < +n; ++i)
+    acc[i] = acc[i - 1] + arr[i - 1];
 
-  vector<pair<int, int>> a(n);
-  for (int i = 0; i < n; ++i)
-    a[i] = make_pair(arr[i], i + 1);
+  long long sum = accumulate(begin(arr), end(arr), 0L);
+  for (int i = 1; i <= n; ++i)
+    if (acc[i - 1] == sum - acc[i - 1] - arr[i - 1])
+      return "YES";
 
-  sort(begin(a), end(a));
-
-  while (l < r) {
-    if (a[l].first + a[r].first == m)
-      return {min(a[l].second, a[r].second), max(a[l].second, a[r].second)};
-    else if (a[l].first + a[r].first < m)
-      ++l;
-    else
-      --r;
-  }
-  return {-1, -1};
+  return "NO";
 }
 
 int main() {
   ofstream fout(getenv("OUTPUT_PATH"));
 
-  string t_temp;
-  getline(cin, t_temp);
+  string T_temp;
+  getline(cin, T_temp);
 
-  int t = stoi(ltrim(rtrim(t_temp)));
+  int T = stoi(ltrim(rtrim(T_temp)));
 
-  for (int t_itr = 0; t_itr < t; t_itr++) {
-    string m_temp;
-    getline(cin, m_temp);
-
-    int m = stoi(ltrim(rtrim(m_temp)));
-
+  for (int T_itr = 0; T_itr < T; T_itr++) {
     string n_temp;
     getline(cin, n_temp);
 
@@ -70,17 +56,9 @@ int main() {
       arr[i] = arr_item;
     }
 
-    vector<int> result = icecreamParlor(m, arr);
+    string result = balancedSums(arr);
 
-    for (size_t i = 0; i < result.size(); i++) {
-      fout << result[i];
-
-      if (i != result.size() - 1) {
-        fout << " ";
-      }
-    }
-
-    fout << "\n";
+    fout << result << "\n";
   }
 
   fout.close();
