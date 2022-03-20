@@ -2,3 +2,5 @@
 .nrepl-port
 *.out
 kata.cpp
+.clj-kondo/.cache/
+.lsp/.cache
