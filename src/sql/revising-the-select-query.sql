@@ -1,3 +1,3 @@
 --https://www.hackerrank.com/challenges/revising-the-select-query/problem
 
-SELECT * FROM CITY WHERE COUNTRYCODE="USA" && POPULATION > 100000;
+SELECT * FROM City WHERE countrycode="USA" && population > 100000;
